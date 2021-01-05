@@ -112,6 +112,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
 
         // Mess it up by closing the handle
         curl_close($handle);
+        unset($handle);
         $this->assertFalse($h->isAvailable());
 
         // Mess it up by unsetting the handle
@@ -152,6 +153,7 @@ class CurlHandleTest extends \Guzzle\Tests\GuzzleTestCase
         $this->assertInternalType('array', $h->getInfo());
 
         curl_close($handle);
+        unset($handle);
         $this->assertEquals(null, $h->getInfo('url'));
     }
 

@@ -337,6 +337,7 @@ class GuzzleSubSplitTask extends GitBaseTask
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $result = curl_exec($ch);
         curl_close($ch);
+        unset($ch);
         $repos = json_decode($result, true);
         $existing_repos = array();
 
@@ -376,6 +377,7 @@ class GuzzleSubSplitTask extends GitBaseTask
                     $result = curl_exec($ch);
                     echo "Response code: ".curl_getinfo($ch, CURLINFO_HTTP_CODE)."\n";
                     curl_close($ch);
+                    unset($ch);
                 } else {
                     $this->log("Repo $reponame exists", 2);
                 }

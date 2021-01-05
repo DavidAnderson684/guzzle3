@@ -46,7 +46,8 @@ class CurlMultiTest extends \Guzzle\Tests\GuzzleTestCase
     {
         $handle = $this->multi->getHandle();
         $this->multi->__destruct();
-        $this->assertFalse(is_resource($handle));
+        $is_resource = false !== $handle;
+        $this->assertFalse($is_resource);
     }
 
     public function testRequestsCanBeAddedAndCounted()
