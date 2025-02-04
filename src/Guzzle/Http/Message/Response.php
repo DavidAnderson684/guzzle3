@@ -160,7 +160,7 @@ class Response extends AbstractMessage implements \Serializable
         return $this->getMessage();
     }
 
-    public function serialize()
+    public function __serialize()
     {
         return json_encode(array(
             'status'  => $this->statusCode,
@@ -169,10 +169,20 @@ class Response extends AbstractMessage implements \Serializable
         ));
     }
 
-    public function unserialize($serialize)
+    public function __unserialize($serialize)
     {
         $data = json_decode($serialize, true);
         $this->__construct($data['status'], $data['headers'], $data['body']);
+    }
+
+    public function serialize()
+    {
+        return $this->__serialize();
+    }
+
+    public function unserialize($serialize)
+    {
+        $this->__unserialize($serialize);
     }
 
     /**
